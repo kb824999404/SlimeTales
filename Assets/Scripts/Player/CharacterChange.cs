@@ -104,4 +104,9 @@ public class CharacterChange : MonoBehaviour
         isHurting = value;
         updateMaterial();
     }
+    public void GetSlime()
+    {
+        CharacterCount++;
+        change();
+    }
 }

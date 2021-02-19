@@ -18,7 +18,7 @@ public abstract class StoryItemBase : MonoBehaviour, ISerializationCallbackRecei
     public bool executeByTrigger=true;              //通过碰撞触发事件
 
     public HashSet<StoryItemBase> requiredStoryItems;       //前置事件
-
+    public List<StoryItemBase> afterStoryItems;         //后续事件集合
     [System.NonSerialized] public HashSet<StoryItemBase> dependentStoryItems = new HashSet<StoryItemBase>();
 
     [SerializeField] StoryItemBase[] _requiredStoryItems;
@@ -38,7 +38,6 @@ public abstract class StoryItemBase : MonoBehaviour, ISerializationCallbackRecei
     {
         ConnectRelations();
         storySystem=StorySystem.getInstance();
-        Debug.Log(storySystem);
     }
 
     void ConnectRelations()
@@ -49,16 +48,23 @@ public abstract class StoryItemBase : MonoBehaviour, ISerializationCallbackRecei
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag != "Player")  return;
 
         if(executeByTrigger)    TriggerEvent();
     }
 
+    void TriggerAfterEvent()        //触发后续事件
+    {
+        foreach(StoryItemBase storyItem in afterStoryItems)
+        {
+            storyItem.TriggerEvent();
+        }
+    }
+
     public void TriggerEvent()      //触发事件
     {
-        Debug.Log(requiredStoryItems.Count);
         foreach (var requiredStoryItem in requiredStoryItems)
             if (requiredStoryItem != null)
                 if (!storySystem.HasSeenStoryItem(requiredStoryItem.ID))
@@ -68,6 +74,7 @@ public abstract class StoryItemBase : MonoBehaviour, ISerializationCallbackRecei
         if (ID != string.Empty)
             storySystem .RegisterStoryItem(ID);
         if (disableWhenDiscovered) gameObject.SetActive(false);
+        TriggerAfterEvent();
     }
 
     protected abstract void executeEvent();       //执行事件

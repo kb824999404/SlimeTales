@@ -5,29 +5,31 @@ using TMPro;
 
 public class ShowCaption : StoryItemBase
 {
-    [SerializeField] public List<string> captions = new List<string>();
-    bool isShowing=false;
+    public List<string> captions;
     public GameObject captionText;
+    public bool showOnce = false;
+
+    bool isShowing=false;
     protected override void executeEvent()
     {
         if(!isShowing)
         {
             Debug.Log("Show Caption");
             captionText.SetActive(true);
-            StartCoroutine(showCaption(2));
+            StartCoroutine(showCaption(2.0f));
             isShowing=true;
         }
-
     }
-
+  
     IEnumerator showCaption(float time)
     {
-        foreach(var caption in captions)
+        foreach(string caption in captions)
         {
-            captionText.GetComponent<TextMeshPro>().text=caption;
+            captionText.GetComponent<TextMeshProUGUI>().text=caption;
             yield return new WaitForSeconds(time);
         }
+        captionText.GetComponent<TextMeshProUGUI>().text = "";
         isShowing=false;
-        gameObject.SetActive(false);
+        if(showOnce)    gameObject.SetActive(false);
     }
 }

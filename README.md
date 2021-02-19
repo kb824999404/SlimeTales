@@ -5,6 +5,11 @@
 * **Name：** Slime Tales
 * **Game Page：** https://ian824.itch.io/slime-tales
 * **Game Style：** `3D`，`low-poly`，`adventure`
-* **Cover：** 
-  * ![Cover](Pics/Cover.png)
+* **Captures：** 
+  * ![Cover](Pics/Cover.jpg)
+  * ![StartAnim](Pics/StartAnim.jpg)
+  * ![Slime](Pics/Slime.jpg)
+  * ![Worms](Pics/Worms.jpg)
+  * ![Stones](Pics/Stones.jpg)
+  * ![Portal](Pics/Portal.jpg)
 

@@ -6,5 +6,5 @@
 * **Game Page：** https://ian824.itch.io/slime-tales
 * **Game Style：** `3D`，`low-poly`，`adventure`
 * **Cover：** 
-  * ![](Pics/Cover.PNG)
+  * ![Cover](Pics/Cover.png)
 

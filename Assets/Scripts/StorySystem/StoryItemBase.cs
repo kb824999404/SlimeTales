@@ -51,7 +51,7 @@ public abstract class StoryItemBase : MonoBehaviour, ISerializationCallbackRecei
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer != LayerMask.NameToLayer("Player"))  return;
+        if (collision.gameObject.tag != "Player")  return;
 
         if(executeByTrigger)    TriggerEvent();
     }
@@ -64,10 +64,6 @@ public abstract class StoryItemBase : MonoBehaviour, ISerializationCallbackRecei
                 if (!storySystem.HasSeenStoryItem(requiredStoryItem.ID))
                     return;
 
-        if (audioClip == null)
-            UserInterfaceAudio.OnStoryItem();
-        else
-            UserInterfaceAudio.PlayClip(audioClip);
         executeEvent();
         if (ID != string.Empty)
             storySystem .RegisterStoryItem(ID);

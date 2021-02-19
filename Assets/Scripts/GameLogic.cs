@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameLogic : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class GameLogic : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        Time.timeScale = 1;
         playerAttribute = player.GetComponent<PlayerAttribute>();
         playerAttribute.gameLogic = this;
 
@@ -35,6 +37,10 @@ public class GameLogic : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.P)||Input.GetKeyDown(KeyCode.Escape))
                 GameResume();
         }
+    }
+    public void Restart()
+    {
+        SceneManager.LoadScene("BlankScene");
     }
     public void GameStart()
     {
@@ -59,5 +65,9 @@ public class GameLogic : MonoBehaviour
         gamingPanel.SetActive(true);
         gamePausePanel.SetActive(false);
         Time.timeScale = 1;
+    }
+    public void GameExit()
+    {
+        SceneManager.LoadScene("StartScene");
     }
 }

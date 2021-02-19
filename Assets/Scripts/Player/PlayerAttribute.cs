@@ -20,7 +20,7 @@ public class PlayerAttribute : MonoBehaviour
     {
         myRigidbody = GetComponent<Rigidbody>();
         characterChange = GetComponent<CharacterChange>();
-        HP=5;
+        HP=4;
         updataHPPanel();
     }
 
